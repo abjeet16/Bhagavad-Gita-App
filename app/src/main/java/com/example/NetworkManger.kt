@@ -42,7 +42,7 @@ class NetworkManger(context: Context): LiveData<Boolean>() {
 
         override fun onLost(network: Network) {
             super.onLost(network)
-            postValue(true)
+            postValue(false)
         }
     }
     private fun CheckNetwork() {

@@ -12,6 +12,7 @@ import androidx.core.view.WindowCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.NetworkManger
 import com.example.chatbot.View.Adapters.ChaptersAdapter
 import com.example.chatbot.viewModel.MainViewModel
 import com.example.shreebhagavatgita.R
@@ -34,9 +35,23 @@ class homeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
         changeStatusBarColor()
-        getAllChapter()
+        checkInternet()
 
         return binding.root
+    }
+
+    private fun checkInternet(){
+        val networkManger = NetworkManger(requireContext())
+        networkManger.observe(viewLifecycleOwner){
+            if (it == true){
+                binding.RecyclerView.visibility = View.VISIBLE
+                binding.NoInternetCardView.visibility = View.GONE
+                getAllChapter()
+            }else{
+                binding.RecyclerView.visibility = View.GONE
+                binding.NoInternetCardView.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun getAllChapter() {
@@ -47,8 +62,6 @@ class homeFragment : Fragment() {
                 binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                 binding.RecyclerView.adapter = adapter
                 adapter.differ.submitList(chapterList)
-
-                binding.RecyclerView.visibility = View.VISIBLE
             }
         }
     }
