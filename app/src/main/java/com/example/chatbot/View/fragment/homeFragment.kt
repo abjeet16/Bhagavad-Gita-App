@@ -5,9 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import com.example.shreebhagavatgita.R
+import com.example.shreebhagavatgita.databinding.FragmentHomeBinding
+
 class homeFragment : Fragment() {
 
+    private lateinit var binding:FragmentHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -16,7 +22,24 @@ class homeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(layoutInflater)
+
+        changeStatusBarColor()
+        return binding.root
+    }
+
+    private fun changeStatusBarColor() {
+        val window = activity?.window
+        if (window != null) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        }
+        if (window != null) {
+            window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
+        }
+        if (window != null) {
+            WindowCompat.getInsetsController(window, window.decorView).apply {
+                isAppearanceLightStatusBars = true
+            }
+        }
     }
 }
