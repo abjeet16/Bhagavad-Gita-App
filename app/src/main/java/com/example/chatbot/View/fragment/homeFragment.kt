@@ -49,6 +49,7 @@ class homeFragment : Fragment() {
                 getAllChapter()
             }else{
                 binding.RecyclerView.visibility = View.GONE
+                //
                 binding.NoInternetCardView.visibility = View.VISIBLE
             }
         }
