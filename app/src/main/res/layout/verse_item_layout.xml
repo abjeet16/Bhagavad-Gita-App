@@ -8,6 +8,7 @@
     android:layout_marginBottom="10dp">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/CardView"
             android:layout_width="match_parent"
             android:layout_height="200dp">
 
@@ -22,7 +23,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="0dp"
-                    android:layout_marginTop="0dp"
+                    android:layout_marginTop="25dp"
                     android:alpha="0.4"
                     android:src="@drawable/up_left" />
 
@@ -52,11 +53,12 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                            app:layout_constraintEnd_toStartOf="@+id/LikeButton"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <TextView
+                                android:id="@+id/chapterNumber"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/latobold"
@@ -65,6 +67,7 @@
                                 android:textSize="15dp" />
 
                             <TextView
+                                android:id="@+id/ChapterName"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/latoextrabold"
@@ -73,7 +76,7 @@
                         </LinearLayout>
 
                         <ImageView
-                            android:id="@+id/imageView3"
+                            android:id="@+id/LikeButton"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:background="@drawable/heartsave"
@@ -84,6 +87,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
+                        android:id="@+id/ChapterContent"
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
                         android:textSize="20dp"
@@ -102,6 +106,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"/>
                         <TextView
+                            android:id="@+id/ChapterVerse"
                             android:gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"

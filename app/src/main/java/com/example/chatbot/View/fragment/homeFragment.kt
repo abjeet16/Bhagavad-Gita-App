@@ -1,6 +1,7 @@
 package com.example.chatbot.View.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +9,20 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.chatbot.View.Adapters.ChaptersAdapter
+import com.example.chatbot.viewModel.MainViewModel
 import com.example.shreebhagavatgita.R
 import com.example.shreebhagavatgita.databinding.FragmentHomeBinding
+import kotlinx.coroutines.launch
 
 class homeFragment : Fragment() {
 
     private lateinit var binding:FragmentHomeBinding
+    private val ViewModel :MainViewModel by viewModels()
+    private lateinit var adapter:ChaptersAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -25,7 +34,23 @@ class homeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
         changeStatusBarColor()
+        getAllChapter()
+
         return binding.root
+    }
+
+    private fun getAllChapter() {
+        lifecycleScope.launch {
+            ViewModel.getAllChapter().collect{
+                chapterList->
+                adapter = ChaptersAdapter()
+                binding.RecyclerView.layoutManager = LinearLayoutManager(context)
+                binding.RecyclerView.adapter = adapter
+                adapter.differ.submitList(chapterList)
+
+                binding.RecyclerView.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun changeStatusBarColor() {

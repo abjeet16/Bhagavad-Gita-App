@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="com.example.chatbot.View.fragment.homeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -109,10 +110,38 @@
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/NoInternetCardView"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_200sdp"
+                    android:background="@drawable/no_internet"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No Internet"
+                    android:textSize="40dp"
+                    android:textColor="@color/statusBarColor"
+                    android:gravity="center"
+                    android:fontFamily="@font/latoextrabold"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
        <androidx.recyclerview.widget.RecyclerView
            android:id="@+id/RecyclerView"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
+           android:layout_marginTop="10dp"
+           android:visibility="gone"
            tools:listitem="@layout/verse_item_layout"/>
 
     </LinearLayout>
