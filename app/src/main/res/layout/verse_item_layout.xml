@@ -13,7 +13,7 @@
             android:layout_height="200dp">
 
             <RelativeLayout
-                android:background="@drawable/verse_item_background"
+                android:background="@drawable/verces_background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
