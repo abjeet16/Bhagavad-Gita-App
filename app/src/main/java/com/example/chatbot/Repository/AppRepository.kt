@@ -2,6 +2,7 @@ package com.example.chatbot.Repository
 
 import com.example.chatbot.datasource.api.ApiUtilities
 import com.example.models.ChaptersItem
+import com.example.models.VercesItemItem
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -28,7 +29,25 @@ class AppRepository {
         }
 
         ApiUtilities.api.getAllChapter().enqueue(callBack)
-
         awaitClose{}
+
+    }
+
+    fun getVerces():Flow<List<VercesItemItem>> = callbackFlow {
+        val callback = object :Callback<List<VercesItemItem>>{
+            override fun onResponse(
+                call: Call<List<VercesItemItem>>,
+                response: Response<List<VercesItemItem>>
+            ) {
+                if (response.isSuccessful && response.body()!= null){
+                    trySend(response.body()!!)
+                    close()
+                }
+            }
+
+            override fun onFailure(call: Call<List<VercesItemItem>>, t: Throwable) {
+                close(t)
+            }
+        }
     }
 }
