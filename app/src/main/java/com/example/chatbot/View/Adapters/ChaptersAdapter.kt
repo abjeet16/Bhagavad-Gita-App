@@ -36,7 +36,7 @@ class ChaptersAdapter(val onChapterItemCLicked: (ChaptersItem) -> Unit) : Recycl
             chapterNumber.text = "Chapter ${chapter.chapter_number}"
             ChapterName.text = chapter.name_translated
             ChapterContent.text = chapter.chapter_summary
-            ChapterVerse.text = chapter.verses_count.toString()
+            ChapterVerse.text = "${chapter.verses_count} Verses"
         }
         holder.binding.CardView.setOnClickListener{
             onChapterItemCLicked(chapter)
