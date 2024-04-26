@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.NetworkManger
 import com.example.chatbot.View.Adapters.ChaptersAdapter
@@ -33,6 +34,7 @@ class homeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater)
+        binding.shimmerLayout.visibility = View.VISIBLE
 
         changeStatusBarColor()
         checkInternet()
@@ -49,6 +51,7 @@ class homeFragment : Fragment() {
                 getAllChapter()
             }else{
                 binding.RecyclerView.visibility = View.GONE
+                binding.shimmerLayout.visibility = View.GONE
                 binding.NoInternetCardView.visibility = View.VISIBLE
             }
         }
@@ -58,6 +61,9 @@ class homeFragment : Fragment() {
         lifecycleScope.launch {
             ViewModel.getAllChapter().collect{
                 chapterList->
+                // making shimmer invisible
+                binding.shimmerLayout.visibility = View.GONE
+
                 adapter = ChaptersAdapter()
                 binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                 binding.RecyclerView.adapter = adapter
