@@ -33,7 +33,8 @@ class AppRepository {
 
     }
 
-    fun getVerces():Flow<List<VercesItemItem>> = callbackFlow {
+    //function to get the verses of a particular chapter clicked
+    fun getverses(chapterNumber:Int):Flow<List<VercesItemItem>> = callbackFlow {
         val callback = object :Callback<List<VercesItemItem>>{
             override fun onResponse(
                 call: Call<List<VercesItemItem>>,
@@ -49,5 +50,7 @@ class AppRepository {
                 close(t)
             }
         }
+        ApiUtilities.api.getVarses(chapterNumber).enqueue(callback)
+        awaitClose{}
     }
 }

@@ -55,7 +55,8 @@
             android:id="@+id/ChapterContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="120dp" />
+            android:maxLines="5"
+            android:minHeight="80dp"/>
 
         <TextView
             android:id="@+id/ReadMore"

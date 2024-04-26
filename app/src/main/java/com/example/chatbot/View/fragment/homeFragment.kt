@@ -1,7 +1,6 @@
 package com.example.chatbot.View.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.NetworkManger
 import com.example.chatbot.View.Adapters.ChaptersAdapter
 import com.example.chatbot.viewModel.MainViewModel
+import com.example.models.ChaptersItem
 import com.example.shreebhagavatgita.R
 import com.example.shreebhagavatgita.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
@@ -59,12 +59,11 @@ class homeFragment : Fragment() {
 
     private fun getAllChapter() {
         lifecycleScope.launch {
-            ViewModel.getAllChapter().collect{
-                chapterList->
+            ViewModel.getAllChapter().collect{ chapterList->
                 // making shimmer invisible
                 binding.shimmerLayout.visibility = View.GONE
 
-                adapter = ChaptersAdapter()
+                adapter = ChaptersAdapter(::onChapterItemView)
                 binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                 binding.RecyclerView.adapter = adapter
                 adapter.differ.submitList(chapterList)
@@ -85,5 +84,13 @@ class homeFragment : Fragment() {
                 isAppearanceLightStatusBars = true
             }
         }
+    }
+    private fun onChapterItemView(chaptersItem: ChaptersItem){
+        val bundle = Bundle()
+        bundle.putInt("chapterNumber",chaptersItem.chapter_number)
+        bundle.putString("chapterTitle",chaptersItem.name_translated)
+        bundle.putString("chapterContent",chaptersItem.chapter_summary)
+        bundle.putInt("ChapterVersesCount",chaptersItem.verses_count)
+        findNavController().navigate(R.id.action_homeFragment_to_versesFragment,bundle)
     }
 }

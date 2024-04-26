@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.models.ChaptersItem
 import com.example.shreebhagavatgita.databinding.VerseItemLayoutBinding
 
-class ChaptersAdapter : RecyclerView.Adapter<ChaptersAdapter.ViewHolder>() {
+class ChaptersAdapter(val onChapterItemCLicked: (ChaptersItem) -> Unit) : RecyclerView.Adapter<ChaptersAdapter.ViewHolder>() {
     inner class ViewHolder(val binding:VerseItemLayoutBinding):RecyclerView.ViewHolder(binding.root)
 
     val diffUtil = object : DiffUtil.ItemCallback<ChaptersItem>(){
@@ -37,10 +37,9 @@ class ChaptersAdapter : RecyclerView.Adapter<ChaptersAdapter.ViewHolder>() {
             ChapterName.text = chapter.name_translated
             ChapterContent.text = chapter.chapter_summary
             ChapterVerse.text = chapter.verses_count.toString()
-
-            CardView.setOnClickListener{
-
-            }
+        }
+        holder.binding.CardView.setOnClickListener{
+            onChapterItemCLicked(chapter)
         }
     }
 }
