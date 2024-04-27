@@ -27,5 +27,14 @@
         android:id="@+id/versesFragment"
         android:name="com.example.chatbot.View.fragment.VersesFragment"
         android:label="fragment_verses"
-        tools:layout="@layout/fragment_verses" />
+        tools:layout="@layout/fragment_verses" >
+        <action
+            android:id="@+id/action_versesFragment_to_fullVersesDetail"
+            app:destination="@id/fullVersesDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/fullVersesDetail"
+        android:name="com.example.chatbot.View.fragment.FullVersesDetail"
+        android:label="fragment_full_verses_detail"
+        tools:layout="@layout/fragment_full_verses_detail" />
 </navigation>

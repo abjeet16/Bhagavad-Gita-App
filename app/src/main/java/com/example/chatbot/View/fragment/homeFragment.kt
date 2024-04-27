@@ -32,12 +32,13 @@ class homeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         binding.shimmerLayout.visibility = View.VISIBLE
 
         changeStatusBarColor()
         checkInternet()
+        getAllChapter()
 
         return binding.root
     }
@@ -48,7 +49,6 @@ class homeFragment : Fragment() {
             if (it == true){
                 binding.RecyclerView.visibility = View.VISIBLE
                 binding.NoInternetCardView.visibility = View.GONE
-                getAllChapter()
             }else{
                 binding.RecyclerView.visibility = View.GONE
                 binding.shimmerLayout.visibility = View.GONE

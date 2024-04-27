@@ -5,12 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.NetworkManger
 import com.example.chatbot.View.Adapters.VersesAdapter
 import com.example.chatbot.viewModel.MainViewModel
+import com.example.shreebhagavatgita.R
 import com.example.shreebhagavatgita.databinding.FragmentVersesBinding
 import kotlinx.coroutines.launch
 
@@ -70,7 +73,7 @@ class VersesFragment : Fragment() {
     private fun getAllVerses() {
         lifecycleScope.launch {
             ViewModel.getverses(chapterNumber).collect{
-                versesAdapter = VersesAdapter()
+                versesAdapter = VersesAdapter(::onVersesItemClicked)
                 binding.RecyclerView.layoutManager = LinearLayoutManager(requireContext())
                 binding.RecyclerView.adapter = versesAdapter
                 val versesList = arrayListOf<String>()
@@ -101,5 +104,11 @@ class VersesFragment : Fragment() {
                 binding.NoInternetCardView.visibility = View.VISIBLE
             }
         }
+    }
+    private fun onVersesItemClicked(verses:String,versesNumber:Int){
+        val bundle = Bundle()
+        bundle.putInt("chapterNumber",chapterNumber)
+        bundle.putInt("versesNumber",versesNumber)
+        findNavController().navigate(R.id.action_versesFragment_to_fullVersesDetail,bundle)
     }
 }
