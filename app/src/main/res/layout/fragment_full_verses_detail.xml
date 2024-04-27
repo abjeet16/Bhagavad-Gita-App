@@ -126,10 +126,11 @@
                             android:layout_marginTop="25dp"
                             android:fontFamily="@font/latoextrabold"
                             android:gravity="center"
-                            android:text="||1.1||"
+                            android:text="||1.2||"
                             android:textSize="25sp" />
 
                         <TextView
+                            android:id="@+id/verseSanskit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="20dp"
@@ -143,6 +144,7 @@
                             android:textSize="20dp" />
 
                         <TextView
+                            android:id="@+id/verseEnglish1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="10dp"
@@ -156,6 +158,7 @@
                             android:textSize="15dp" />
 
                         <TextView
+                            android:id="@+id/verseEnglish2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="10dp"
@@ -217,7 +220,7 @@
                                 android:text="Auther : " />
 
                             <TextView
-                                android:id="@+id/AutherName"
+                                android:id="@+id/TranslationAutherName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/latoextrabold"

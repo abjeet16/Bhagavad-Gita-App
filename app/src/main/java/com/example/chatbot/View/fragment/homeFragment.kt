@@ -25,9 +25,6 @@ class homeFragment : Fragment() {
     private lateinit var binding:FragmentHomeBinding
     private val ViewModel :MainViewModel by viewModels()
     private lateinit var adapter:ChaptersAdapter
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +32,7 @@ class homeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         binding.shimmerLayout.visibility = View.VISIBLE
+        binding.RecyclerView.visibility = View.GONE
 
         changeStatusBarColor()
         checkInternet()

@@ -14,4 +14,6 @@ class MainViewModel : ViewModel() {
     fun getAllChapter(): Flow<List<ChaptersItem>> = appRepository.getAllChapter()
     //getting result from function in app appRepository name getverses
     fun getverses(chapterNumber:Int):Flow<List<VercesItemItem>> = appRepository.getverses(chapterNumber)
+
+    fun getVarseDetail(chapterNumber: Int,verseNumber:Int):Flow<VercesItemItem> = appRepository.getVarseDetail(chapterNumber,verseNumber)
 }

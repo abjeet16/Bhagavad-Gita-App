@@ -14,4 +14,10 @@ interface ApiInterface {
 
     @GET("/v2/chapters/{chapterNumber}/verses/")
     fun getVarses(@Path("chapterNumber") chapterNumber:Int) : Call<List<VercesItemItem>>
+
+    @GET("/v2/chapters/{chapterNumber}/verses/{verseNumber}/")
+    fun getVarseDetail(
+        @Path("chapterNumber") chapterNumber: Int,
+        @Path("verseNumber") versesNumber : Int)
+    :Call<VercesItemItem>
 }

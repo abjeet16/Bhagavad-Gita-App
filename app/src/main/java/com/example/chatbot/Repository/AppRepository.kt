@@ -53,4 +53,24 @@ class AppRepository {
         ApiUtilities.api.getVarses(chapterNumber).enqueue(callback)
         awaitClose{}
     }
+
+    fun getVarseDetail(chapterNumber: Int,verseNumber:Int):Flow<VercesItemItem> = callbackFlow {
+        val callback = object : Callback<VercesItemItem>{
+            override fun onResponse(
+                call: Call<VercesItemItem>,
+                response: Response<VercesItemItem>
+            ) {
+                if (response.isSuccessful && response.body()!= null){
+                    trySend(response.body()!!)
+                    close()
+                }
+            }
+
+            override fun onFailure(call: Call<VercesItemItem>, t: Throwable) {
+                close(t)
+            }
+        }
+        ApiUtilities.api.getVarseDetail(chapterNumber,verseNumber).enqueue(callback)
+        awaitClose{}
+    }
 }

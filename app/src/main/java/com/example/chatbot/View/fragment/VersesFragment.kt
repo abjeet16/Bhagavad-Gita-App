@@ -25,12 +25,6 @@ class VersesFragment : Fragment() {
     private  var chapterNumber:Int = 0
     private var readMoreCount:Boolean = true
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
