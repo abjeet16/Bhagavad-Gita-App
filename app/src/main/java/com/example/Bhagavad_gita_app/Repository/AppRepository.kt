@@ -1,6 +1,6 @@
-package com.example.chatbot.Repository
+package com.example.Bhagavad_gita_app.Repository
 
-import com.example.chatbot.datasource.api.ApiUtilities
+import com.example.Bhagavad_gita_app.datasource.api.ApiUtilities
 import com.example.models.ChaptersItem
 import com.example.models.VercesItemItem
 import kotlinx.coroutines.channels.awaitClose

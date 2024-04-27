@@ -1,10 +1,9 @@
-package com.example.chatbot.datasource.api
+package com.example.Bhagavad_gita_app.datasource.api
 
 import com.example.models.ChaptersItem
 import com.example.models.VercesItemItem
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Path
 
 interface ApiInterface {

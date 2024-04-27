@@ -1,4 +1,4 @@
-package com.example.chatbot.View.fragment
+package com.example.Bhagavad_gita_app.View.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,12 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.NetworkManger
-import com.example.chatbot.viewModel.MainViewModel
+import com.example.Bhagavad_gita_app.viewModel.MainViewModel
 import com.example.models.Commentary
 import com.example.models.Translation
-import com.example.shreebhagavatgita.R
 import com.example.shreebhagavatgita.databinding.FragmentFullVersesDetailBinding
-import com.example.shreebhagavatgita.databinding.FragmentVersesBinding
 import kotlinx.coroutines.launch
 
 
@@ -133,7 +131,7 @@ class FullVersesDetail : Fragment() {
         verseNumber = bundle?.getInt("versesNumber")!!
         ChapterNumber = bundle?.getInt("chapterNumber")!!
 
-        binding.verseNumber.text = "||$verseNumber.$ChapterNumber||"
+        binding.verseNumber.text = "||$ChapterNumber.$verseNumber||"
     }
 
     private fun checkInternet(){

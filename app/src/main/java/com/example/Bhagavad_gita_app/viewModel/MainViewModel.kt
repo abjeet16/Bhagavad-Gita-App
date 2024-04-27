@@ -1,7 +1,7 @@
-package com.example.chatbot.viewModel
+package com.example.Bhagavad_gita_app.viewModel
 
 import androidx.lifecycle.ViewModel
-import com.example.chatbot.Repository.AppRepository
+import com.example.Bhagavad_gita_app.Repository.AppRepository
 import com.example.models.ChaptersItem
 import com.example.models.VercesItemItem
 import kotlinx.coroutines.flow.Flow

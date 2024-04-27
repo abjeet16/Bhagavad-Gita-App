@@ -1,4 +1,4 @@
-package com.example.chatbot.View
+package com.example.Bhagavad_gita_app.View
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

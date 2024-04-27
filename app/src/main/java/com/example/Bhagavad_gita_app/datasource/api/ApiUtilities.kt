@@ -1,4 +1,4 @@
-package com.example.chatbot.datasource.api
+package com.example.Bhagavad_gita_app.datasource.api
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

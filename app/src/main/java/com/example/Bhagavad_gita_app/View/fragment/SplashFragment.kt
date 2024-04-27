@@ -1,4 +1,4 @@
-package com.example.chatbot.View.fragment
+package com.example.Bhagavad_gita_app.View.fragment
 
 import android.os.Bundle
 import android.os.Handler

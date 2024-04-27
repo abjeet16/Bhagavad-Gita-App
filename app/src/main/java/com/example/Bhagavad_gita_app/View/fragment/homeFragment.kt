@@ -1,4 +1,4 @@
-package com.example.chatbot.View.fragment
+package com.example.Bhagavad_gita_app.View.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,8 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.NetworkManger
-import com.example.chatbot.View.Adapters.ChaptersAdapter
-import com.example.chatbot.viewModel.MainViewModel
+import com.example.Bhagavad_gita_app.View.Adapters.ChaptersAdapter
+import com.example.Bhagavad_gita_app.viewModel.MainViewModel
 import com.example.models.ChaptersItem
 import com.example.shreebhagavatgita.R
 import com.example.shreebhagavatgita.databinding.FragmentHomeBinding
@@ -36,7 +36,6 @@ class homeFragment : Fragment() {
 
         changeStatusBarColor()
         checkInternet()
-        getAllChapter()
 
         return binding.root
     }
@@ -47,6 +46,7 @@ class homeFragment : Fragment() {
             if (it == true){
                 binding.RecyclerView.visibility = View.VISIBLE
                 binding.NoInternetCardView.visibility = View.GONE
+                getAllChapter()
             }else{
                 binding.RecyclerView.visibility = View.GONE
                 binding.shimmerLayout.visibility = View.GONE

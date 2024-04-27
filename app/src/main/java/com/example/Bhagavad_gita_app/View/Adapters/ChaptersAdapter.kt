@@ -1,4 +1,4 @@
-package com.example.chatbot.View.Adapters
+package com.example.Bhagavad_gita_app.View.Adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

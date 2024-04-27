@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.chatbot.View.fragment.SplashFragment"
+        android:name="com.example.Bhagavad_gita_app.View.fragment.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.chatbot.View.fragment.homeFragment"
+        android:name="com.example.Bhagavad_gita_app.View.fragment.homeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/versesFragment"
-        android:name="com.example.chatbot.View.fragment.VersesFragment"
+        android:name="com.example.Bhagavad_gita_app.View.fragment.VersesFragment"
         android:label="fragment_verses"
         tools:layout="@layout/fragment_verses" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/fullVersesDetail"
-        android:name="com.example.chatbot.View.fragment.FullVersesDetail"
+        android:name="com.example.Bhagavad_gita_app.View.fragment.FullVersesDetail"
         android:label="fragment_full_verses_detail"
         tools:layout="@layout/fragment_full_verses_detail" />
 </navigation>

@@ -17,7 +17,7 @@
         android:theme="@style/Theme.ChatBot"
         tools:targetApi="31">
         <activity
-            android:name="com.example.chatbot.View.MainActivity"
+            android:name="com.example.Bhagavad_gita_app.View.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
