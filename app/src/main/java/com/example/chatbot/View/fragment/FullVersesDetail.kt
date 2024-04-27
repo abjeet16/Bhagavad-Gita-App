@@ -95,6 +95,7 @@ class FullVersesDetail : Fragment() {
                         if (translationListSize == 1){
                             CommentaryNextButton.visibility = View.GONE
                         }
+                        // next and back button code
                         var i = 0
                         CommentaryNextButton.setOnClickListener{
                             if (i<CommentaryListSize-1){
