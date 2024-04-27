@@ -111,8 +111,8 @@ class FullVersesDetail : Fragment() {
                             if (i>0){
                                 i--
                                 CommentaryBackButton.visibility = View.VISIBLE
-                                CommentaryName.text = TranslationList[i].author_name
-                                Commentary.text = TranslationList[i].description.trim()
+                                CommentaryName.text = CommentaryList[i].author_name
+                                Commentary.text = CommentaryList[i].description.trim()
                                 if (i==0) {
                                     CommentaryBackButton.visibility = View.GONE
                                 }
