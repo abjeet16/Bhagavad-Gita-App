@@ -61,8 +61,8 @@
         android:label="fragment_saved_chapter"
         tools:layout="@layout/fragment_saved_chapter" >
         <action
-            android:id="@+id/action_savedChapterFragment_to_fullVersesDetail"
-            app:destination="@id/fullVersesDetail" />
+            android:id="@+id/action_savedChapterFragment_to_versesFragment"
+            app:destination="@id/versesFragment" />
     </fragment>
     <fragment
         android:id="@+id/savedVersesFragment"
@@ -70,7 +70,7 @@
         android:label="fragment_saved_verses"
         tools:layout="@layout/fragment_saved_verses" >
         <action
-            android:id="@+id/action_savedVersesFragment_to_versesFragment"
-            app:destination="@id/versesFragment" />
+            android:id="@+id/action_savedVersesFragment_to_fullVersesDetail"
+            app:destination="@id/fullVersesDetail" />
     </fragment>
 </navigation>
