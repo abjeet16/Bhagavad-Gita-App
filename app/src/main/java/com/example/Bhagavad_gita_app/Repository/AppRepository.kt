@@ -1,6 +1,9 @@
 package com.example.Bhagavad_gita_app.Repository
 
+import androidx.lifecycle.LiveData
 import com.example.Bhagavad_gita_app.datasource.api.ApiUtilities
+import com.example.Bhagavad_gita_app.datasource.api.RoomDB.SavedChaptersDao
+import com.example.Bhagavad_gita_app.datasource.api.RoomDB.savedChapters
 import com.example.models.ChaptersItem
 import com.example.models.VercesItemItem
 import kotlinx.coroutines.channels.awaitClose
@@ -10,7 +13,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AppRepository {
+class AppRepository(val savedChaptersDao: SavedChaptersDao) {
     fun getAllChapter(): Flow<List<ChaptersItem>> = callbackFlow {
         val callBack = object : Callback<List<ChaptersItem>>{
             override fun onResponse(
@@ -73,4 +76,8 @@ class AppRepository {
         ApiUtilities.api.getVarseDetail(chapterNumber,verseNumber).enqueue(callback)
         awaitClose{}
     }
+
+    suspend fun insertChapters(savedChapter : savedChapters) = savedChaptersDao.insertChapters(savedChapter)
+
+    fun getSavedChapters(): LiveData<List<savedChapters>> = savedChaptersDao.getSavedChapters()
 }
