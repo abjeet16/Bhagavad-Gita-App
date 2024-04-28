@@ -32,7 +32,6 @@ class FullVersesDetail : Fragment() {
 
         checkInternet()
         getAndsetChapterAndVerseNumber()
-        getVersesDeails()
         return binding.root
     }
 
@@ -140,6 +139,7 @@ class FullVersesDetail : Fragment() {
             if (it == true){
                 binding.ScrollView.visibility = View.VISIBLE
                 binding.NoInternetCardView.visibility = View.GONE
+                getVersesDeails()
             }else{
                 binding.progressBar.visibility = View.GONE
                 binding.ScrollView.visibility = View.GONE

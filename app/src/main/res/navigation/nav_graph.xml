@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment_to_versesFragment"
             app:destination="@id/versesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_fullVersesDetail"
+            app:destination="@id/fullVersesDetail" />
     </fragment>
     <fragment
         android:id="@+id/versesFragment"

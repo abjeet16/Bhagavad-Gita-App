@@ -1,6 +1,7 @@
 package com.example.Bhagavad_gita_app.View.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,8 @@ class homeFragment : Fragment() {
     private lateinit var binding:FragmentHomeBinding
     private val ViewModel :MainViewModel by viewModels()
     private lateinit var adapter:ChaptersAdapter
+    private var RandomverseNumber = 0
+    private var RandomchapterNumber = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,8 +39,35 @@ class homeFragment : Fragment() {
 
         changeStatusBarColor()
         checkInternet()
+        showVerseOfTheDay()
+        verseOfTheDayClicked()
+        getVersesCount()
 
         return binding.root
+    }
+
+    private fun getVersesCount() {
+
+    }
+
+    private fun verseOfTheDayClicked() {
+        binding.VerseOfTheDay.setOnClickListener{
+            val bundle = Bundle()
+            bundle.putInt("chapterNumber",RandomchapterNumber)
+            bundle.putInt("versesNumber",RandomverseNumber)
+            findNavController().navigate(R.id.action_homeFragment_to_fullVersesDetail,bundle)
+        }
+    }
+
+    private fun showVerseOfTheDay() {
+        RandomchapterNumber = (1 .. 18).random()
+        RandomverseNumber = (1..20).random()
+
+        lifecycleScope.launch {
+            ViewModel.getVarseDetail(RandomchapterNumber,RandomverseNumber).collect{
+                binding.VerseOfTheDay.text = it.text
+            }
+        }
     }
 
     private fun checkInternet(){
