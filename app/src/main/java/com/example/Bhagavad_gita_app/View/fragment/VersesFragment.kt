@@ -27,7 +27,7 @@ class VersesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentVersesBinding.inflate(layoutInflater)
         binding.shimmerLayout.visibility = View.VISIBLE
 
