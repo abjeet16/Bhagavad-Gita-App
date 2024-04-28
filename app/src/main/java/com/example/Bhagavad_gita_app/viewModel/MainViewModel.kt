@@ -26,4 +26,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     suspend fun insertChapters(savedChapter : savedChapters) = appRepository.insertChapters(savedChapter)
 
     fun getSavedChapters(): LiveData<List<savedChapters>> = appRepository.getSavedChapters()
+
+    fun getaParticularChapter(chapter_number : Int) : LiveData<savedChapters> = appRepository.getaParticularChapter(chapter_number)
 }

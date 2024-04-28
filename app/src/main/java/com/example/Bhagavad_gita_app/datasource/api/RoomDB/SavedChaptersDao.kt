@@ -12,7 +12,7 @@ interface SavedChaptersDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertChapters(savedChapter : savedChapters)
 
-    @Query("Select * from savedChapters")
+    @Query("SELECT * FROM savedChapters")
     fun getSavedChapters(): LiveData<List<savedChapters>>
 
     @Query("Delete from savedChapters where id = :id")

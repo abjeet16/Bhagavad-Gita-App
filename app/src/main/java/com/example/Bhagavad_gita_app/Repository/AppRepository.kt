@@ -80,4 +80,6 @@ class AppRepository(val savedChaptersDao: SavedChaptersDao) {
     suspend fun insertChapters(savedChapter : savedChapters) = savedChaptersDao.insertChapters(savedChapter)
 
     fun getSavedChapters(): LiveData<List<savedChapters>> = savedChaptersDao.getSavedChapters()
+
+    fun getaParticularChapter(chapter_number : Int) : LiveData<savedChapters> = savedChaptersDao.getaParticularChapter(chapter_number)
 }
