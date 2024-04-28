@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_homeFragment_to_fullVersesDetail"
             app:destination="@id/fullVersesDetail" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/versesFragment"
@@ -40,4 +43,34 @@
         android:name="com.example.Bhagavad_gita_app.View.fragment.FullVersesDetail"
         android:label="fragment_full_verses_detail"
         tools:layout="@layout/fragment_full_verses_detail" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.Bhagavad_gita_app.View.fragment.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_savedChapterFragment"
+            app:destination="@id/savedChapterFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_savedVersesFragment"
+            app:destination="@id/savedVersesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedChapterFragment"
+        android:name="com.example.Bhagavad_gita_app.View.fragment.SavedChapterFragment"
+        android:label="fragment_saved_chapter"
+        tools:layout="@layout/fragment_saved_chapter" >
+        <action
+            android:id="@+id/action_savedChapterFragment_to_fullVersesDetail"
+            app:destination="@id/fullVersesDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedVersesFragment"
+        android:name="com.example.Bhagavad_gita_app.View.fragment.SavedVersesFragment"
+        android:label="fragment_saved_verses"
+        tools:layout="@layout/fragment_saved_verses" >
+        <action
+            android:id="@+id/action_savedVersesFragment_to_versesFragment"
+            app:destination="@id/versesFragment" />
+    </fragment>
 </navigation>
