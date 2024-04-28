@@ -40,8 +40,6 @@ class homeFragment : Fragment() {
 
         changeStatusBarColor()
         checkInternet()
-        showVerseOfTheDay()
-        verseOfTheDayClicked()
 
         binding.settingsButton.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
@@ -77,6 +75,8 @@ class homeFragment : Fragment() {
                 binding.RecyclerView.visibility = View.VISIBLE
                 binding.NoInternetCardView.visibility = View.GONE
                 getAllChapter()
+                showVerseOfTheDay()
+                verseOfTheDayClicked()
             }else{
                 binding.RecyclerView.visibility = View.GONE
                 binding.shimmerLayout.visibility = View.GONE

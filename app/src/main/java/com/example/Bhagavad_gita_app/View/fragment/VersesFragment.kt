@@ -1,17 +1,17 @@
 package com.example.Bhagavad_gita_app.View.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.NetworkManger
 import com.example.Bhagavad_gita_app.View.Adapters.VersesAdapter
 import com.example.Bhagavad_gita_app.viewModel.MainViewModel
+import com.example.NetworkManger
 import com.example.shreebhagavatgita.R
 import com.example.shreebhagavatgita.databinding.FragmentVersesBinding
 import kotlinx.coroutines.launch
@@ -32,9 +32,32 @@ class VersesFragment : Fragment() {
         binding.shimmerLayout.visibility = View.VISIBLE
 
         getAndSetChapterDetails()
-        checkInternet()
+        getData()
         ClickLisners()
         return binding.root
+    }
+
+    private fun getData() {
+        val bundle = arguments
+        // false if redirected from Api  // true if redirected from RoomDB
+        val showDataFromRoom = bundle?.getBoolean("RoomDB",false)
+        if (showDataFromRoom==true){
+            getDataFromRoom()
+        }else{
+            checkInternet()
+        }
+    }
+
+    private fun getDataFromRoom() {
+        binding.NoInternetCardView.visibility = View.GONE
+        ViewModel.getaParticularChapter(chapterNumber).observe(viewLifecycleOwner){
+            binding.ChapterNumber.text = "Chapter ${it.chapter_number}"
+            binding.ChapterContent.text = it.chapter_summary
+            binding.VerseNumber.text= "${it.verses_count} Verses"
+            binding.ChapterName.text = it.name_translated
+
+            showListInAdapter(it.verses,true)
+        }
     }
 
     private fun ClickLisners() {
@@ -65,9 +88,6 @@ class VersesFragment : Fragment() {
     private fun getAllVerses() {
         lifecycleScope.launch {
             ViewModel.getverses(chapterNumber).collect{
-                versesAdapter = VersesAdapter(::onVersesItemClicked)
-                binding.RecyclerView.layoutManager = LinearLayoutManager(requireContext())
-                binding.RecyclerView.adapter = versesAdapter
                 val versesList = arrayListOf<String>()
                 for (currentVerses in it){
                     for (verses in currentVerses.translations){
@@ -77,11 +97,18 @@ class VersesFragment : Fragment() {
                         }
                     }
                 }
-                versesAdapter.differ.submitList(versesList)
-                binding.RecyclerView.visibility = View.VISIBLE
-                binding.shimmerLayout.visibility = View.GONE
+                showListInAdapter(versesList,false)
             }
         }
+    }
+
+    private fun showListInAdapter(versesList: List<String>,onClickByRoomDB:Boolean) {
+        versesAdapter = VersesAdapter(::onVersesItemClicked,onClickByRoomDB)
+        binding.RecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.RecyclerView.adapter = versesAdapter
+        versesAdapter.differ.submitList(versesList)
+        binding.RecyclerView.visibility = View.VISIBLE
+        binding.shimmerLayout.visibility = View.GONE
     }
 
     private fun checkInternet(){

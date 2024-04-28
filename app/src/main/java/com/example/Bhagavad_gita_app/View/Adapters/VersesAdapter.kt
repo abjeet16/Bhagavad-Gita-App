@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shreebhagavatgita.databinding.AllverceslayoutBinding
 
-class VersesAdapter(val versesClicked: (String, Int) -> Unit) : RecyclerView.Adapter<VersesAdapter.ViewHolder>() {
+class VersesAdapter(val versesClicked: (String, Int) -> Unit, val onClickByRoomDB: Boolean) : RecyclerView.Adapter<VersesAdapter.ViewHolder>() {
     inner class ViewHolder(val binding: AllverceslayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
     val diffUtil = object : DiffUtil.ItemCallback<String>(){
@@ -34,8 +34,12 @@ class VersesAdapter(val versesClicked: (String, Int) -> Unit) : RecyclerView.Ada
             verceNumber.text = "Verse ${position+1}"
             verceContent.text = verse
 
-            Verses.setOnClickListener{
-                versesClicked(verse,position+1)
+            if (onClickByRoomDB==false){
+                Verses.setOnClickListener{
+                    versesClicked(verse,position+1)
+                }
+            }else{
+                holder.binding.Verses.isClickable = false
             }
         }
     }
