@@ -6,10 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-@Database(entities = [savedChapters :: class], version = 1, exportSchema = false)
+@Database(entities = [savedChapters :: class,savedVerse::class], version = 2, exportSchema = false)
 @TypeConverters(AppTypeConverter::class)
 abstract class AppDataBase : RoomDatabase(){
     abstract fun savedChaptersDao(): SavedChaptersDao
+    abstract fun savedVersesDao():SavedVersesDao
 
     companion object{
         @Volatile
@@ -19,7 +20,7 @@ abstract class AppDataBase : RoomDatabase(){
             val temInstant : AppDataBase? = Instance
             if (Instance != null) {
                 return temInstant
-            } else
+            }
             synchronized(this){
                 val roomDb = Room.databaseBuilder(context, AppDataBase::class.java,"AppDatabase")
                     .fallbackToDestructiveMigration().build()

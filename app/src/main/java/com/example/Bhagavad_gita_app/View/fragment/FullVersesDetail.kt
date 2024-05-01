@@ -1,16 +1,19 @@
 package com.example.Bhagavad_gita_app.View.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
-import com.example.NetworkManger
+import com.example.Bhagavad_gita_app.datasource.api.RoomDB.savedVerse
 import com.example.Bhagavad_gita_app.viewModel.MainViewModel
+import com.example.NetworkManger
 import com.example.models.Commentary
 import com.example.models.Translation
+import com.example.models.VercesItemItem
 import com.example.shreebhagavatgita.databinding.FragmentFullVersesDetailBinding
 import kotlinx.coroutines.launch
 
@@ -21,6 +24,7 @@ class FullVersesDetail : Fragment() {
     private val viewModel:MainViewModel by viewModels()
     private var ChapterNumber = 0
     private var verseNumber = 0
+    private var versesDetails = MutableLiveData<VercesItemItem>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,17 +43,18 @@ class FullVersesDetail : Fragment() {
         lifecycleScope.launch {
             viewModel.getVarseDetail(ChapterNumber,verseNumber).collect{
                 verse->
+                versesDetails.postValue(verse)
                 binding.apply {
                     verseSanskit.text = verse.text
                     verseEnglish1.text = verse.transliteration
                     verseEnglish2.text = verse.word_meanings
 
                     val TranslationList = arrayListOf<Translation>()
-                    val CommentaryList = arrayListOf<Commentary>()
-
                     for (i in verse.translations){
                         TranslationList.add(i)
                     }
+
+                    val CommentaryList = arrayListOf<Commentary>()
                     for (i in verse.commentaries){
                         CommentaryList.add(i)
                     }
@@ -118,6 +123,42 @@ class FullVersesDetail : Fragment() {
                         }
                     }
                 }
+            }
+        }
+        savebuttonClicked()
+    }
+
+    private fun savebuttonClicked() {
+        binding.SaveVerse.setOnClickListener {
+            binding.SaveVerse.visibility = View.GONE
+            saveVerse()
+        }
+    }
+
+    private fun saveVerse() {
+        versesDetails.observe(viewLifecycleOwner){
+
+            val TranslationList = arrayListOf<Translation>()
+            for (i in it.translations){
+                TranslationList.add(i)
+            }
+            val CommentaryList = arrayListOf<Commentary>()
+            for (i in it.commentaries){
+                CommentaryList.add(i)
+            }
+            val saveVerses = savedVerse(
+                 it.chapter_number,
+                CommentaryList,
+                it.id,
+                it.slug,
+                it.text,
+                TranslationList,
+                it.transliteration,
+                it.verse_number,
+                it.word_meanings
+            )
+            lifecycleScope.launch {
+                viewModel.insertVerse(saveVerses)
             }
         }
     }
