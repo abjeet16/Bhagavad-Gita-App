@@ -57,30 +57,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:gravity="center"
                     app:layout_constraintStart_toStartOf="parent"
+                    android:orientation="horizontal"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/pageTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:fontFamily="@font/latoextrabold"
                         android:gravity="center"
                         android:text="श्रीमद् भगवद् गीता"
                         android:textColor="@color/statusBarColor"
                         android:textSize="30dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/settingsButton"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
-                        android:id="@+id/settingsButton"
+                        android:id="@+id/SaveVerse"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="5dp"
+                        android:layout_gravity="center"
                         android:src="@drawable/heartsave"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
