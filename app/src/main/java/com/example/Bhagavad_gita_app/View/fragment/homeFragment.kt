@@ -1,21 +1,22 @@
 package com.example.Bhagavad_gita_app.View.fragment
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.NetworkManger
 import com.example.Bhagavad_gita_app.View.Adapters.ChaptersAdapter
+import com.example.Bhagavad_gita_app.datasource.api.RoomDB.savedChapters
 import com.example.Bhagavad_gita_app.viewModel.MainViewModel
+import com.example.NetworkManger
 import com.example.models.ChaptersItem
 import com.example.shreebhagavatgita.R
 import com.example.shreebhagavatgita.databinding.FragmentHomeBinding
@@ -24,7 +25,7 @@ import kotlinx.coroutines.launch
 class homeFragment : Fragment() {
 
     private lateinit var binding:FragmentHomeBinding
-    private val ViewModel :MainViewModel by viewModels()
+    private val viewModel :MainViewModel by viewModels()
     private lateinit var adapter:ChaptersAdapter
     private var RandomverseNumber = 0
     private var RandomchapterNumber = 0
@@ -39,15 +40,12 @@ class homeFragment : Fragment() {
 
         changeStatusBarColor()
         checkInternet()
-        showVerseOfTheDay()
-        verseOfTheDayClicked()
-        getVersesCount()
+
+        binding.settingsButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
+        }
 
         return binding.root
-    }
-
-    private fun getVersesCount() {
-
     }
 
     private fun verseOfTheDayClicked() {
@@ -64,7 +62,7 @@ class homeFragment : Fragment() {
         RandomverseNumber = (1..20).random()
 
         lifecycleScope.launch {
-            ViewModel.getVarseDetail(RandomchapterNumber,RandomverseNumber).collect{
+            viewModel.getVarseDetail(RandomchapterNumber,RandomverseNumber).collect{
                 binding.VerseOfTheDay.text = it.text
             }
         }
@@ -77,6 +75,8 @@ class homeFragment : Fragment() {
                 binding.RecyclerView.visibility = View.VISIBLE
                 binding.NoInternetCardView.visibility = View.GONE
                 getAllChapter()
+                showVerseOfTheDay()
+                verseOfTheDayClicked()
             }else{
                 binding.RecyclerView.visibility = View.GONE
                 binding.shimmerLayout.visibility = View.GONE
@@ -87,11 +87,11 @@ class homeFragment : Fragment() {
 
     private fun getAllChapter() {
         lifecycleScope.launch {
-            ViewModel.getAllChapter().collect{ chapterList->
+            viewModel.getAllChapter().collect{ chapterList->
                 // making shimmer invisible
                 binding.shimmerLayout.visibility = View.GONE
 
-                adapter = ChaptersAdapter(::onChapterItemView)
+                adapter = ChaptersAdapter(::onChapterItemView,::onSaveChapterClicked)
                 binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                 binding.RecyclerView.adapter = adapter
                 adapter.differ.submitList(chapterList)
@@ -120,5 +120,37 @@ class homeFragment : Fragment() {
         bundle.putString("chapterContent",chaptersItem.chapter_summary)
         bundle.putInt("ChapterVersesCount",chaptersItem.verses_count)
         findNavController().navigate(R.id.action_homeFragment_to_versesFragment,bundle)
+    }
+    fun onSaveChapterClicked(chapterItem:ChaptersItem){
+        Toast.makeText(activity,"done",Toast.LENGTH_SHORT).show()
+        lifecycleScope.launch {
+            viewModel.getverses(chapterItem.chapter_number).collect{
+                val versesList = arrayListOf<String>()
+                for (currentVerses in it){
+                    for (verses in currentVerses.translations){
+                        if (verses.language == "english"){
+                            versesList.add(verses.description)
+                            break
+                        }
+                    }
+                }
+                val savedChapter = savedChapters(
+                    chapter_number = chapterItem.chapter_number,
+                    chapter_summary =  chapterItem.chapter_summary,
+                    chapter_summary_hindi = chapterItem.chapter_summary_hindi,
+                    id = chapterItem.id,
+                    name = chapterItem.name,
+                    name_meaning = chapterItem.name_meaning,
+                    name_translated = chapterItem.name_translated,
+                    name_transliterated = chapterItem.name_transliterated,
+                    slug = chapterItem.slug,
+                    verses_count = chapterItem.verses_count,
+
+                    verses = versesList
+
+                )
+                viewModel.insertChapters(savedChapter)
+            }
+        }
     }
 }

@@ -40,8 +40,8 @@
     <ScrollView
         android:visibility="visible"
         android:id="@+id/ScrollView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,30 +57,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:gravity="center"
                     app:layout_constraintStart_toStartOf="parent"
+                    android:orientation="horizontal"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/pageTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:fontFamily="@font/latoextrabold"
                         android:gravity="center"
                         android:text="श्रीमद् भगवद् गीता"
                         android:textColor="@color/statusBarColor"
                         android:textSize="30dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/settingsButton"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
-                        android:id="@+id/settingsButton"
+                        android:id="@+id/SaveVerse"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="5dp"
+                        android:layout_gravity="center"
                         android:src="@drawable/heartsave"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -126,7 +126,6 @@
                             android:layout_marginTop="25dp"
                             android:fontFamily="@font/latoextrabold"
                             android:gravity="center"
-                            android:text="||1.2||"
                             android:textSize="25sp" />
 
                         <TextView
@@ -138,7 +137,6 @@
                             android:fontFamily="@font/latobold"
                             android:gravity="center"
                             android:inputType="textMultiLine"
-                            android:text="धृतराष्ट्र उवाच धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः। मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय"
                             android:textAlignment="center"
                             android:textColor="@color/statusBarColor"
                             android:textSize="20dp" />
@@ -152,7 +150,6 @@
                             android:fontFamily="@font/latoregular"
                             android:gravity="center"
                             android:inputType="textMultiLine"
-                            android:text="dhṛitarāśhtra uvācha dharma-kṣhetre kuru-kṣhetre samavetā yuyutsavaḥ māmakāḥ pāṇḍavāśhchaiva kimakurvata sañjaya"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="15dp" />
@@ -165,7 +162,6 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center"
                             android:inputType="textMultiLine"
-                            android:text="dhṛitarāśhtraḥ uvācha—Dhritarashtra said; dharma-kṣhetre—the land of dharma; kuru-kṣhetre—at Kurukshetra; samavetāḥ—having gathered; yuyutsavaḥ—desiring to fight; māmakāḥ—my sons; pāṇḍavāḥ—the sons of Pandu; cha—and; eva—certainly; kim—what; akurvata—did they do; sañjaya—Sanjay"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="15dp" />
@@ -224,7 +220,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/latoextrabold"
-                                android:text="Swami Sivananda"
                                 android:textSize="15sp" />
 
                         </LinearLayout>
@@ -236,7 +231,6 @@
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/latoregular"
                             android:minHeight="60dp"
-                            android:text="Dhritarashtra said, What did my people and the sons of Pandu do when they had assembled together, eager for battle, on the holy plain of Kurukshetra, O Sanjaya?"
                             android:textSize="16dp" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -247,7 +241,9 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
+
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/cardView2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:cardCornerRadius="10dp"
@@ -259,24 +255,22 @@
                                     android:id="@+id/TranslationBackButton"
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
-                                    android:background="@drawable/translation_back"/>
+                                    android:background="@drawable/translation_back" />
                             </androidx.cardview.widget.CardView>
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:cardCornerRadius="10dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent">
-
-                                <ImageButton
+                                <ImageView
                                     android:id="@+id/TranslationNextButton"
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
                                     android:background="@drawable/translation_next"/>
-
                             </androidx.cardview.widget.CardView>
+
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </LinearLayout>
 
@@ -327,7 +321,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/latoextrabold"
-                                android:text="Swami Sivananda"
                                 android:textSize="15sp" />
 
                         </LinearLayout>
@@ -339,7 +332,6 @@
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/latoregular"
                             android:minHeight="60dp"
-                            android:text="Dhritarashtra said, What did my people and the sons of Pandu do when they had assembled together, eager for battle, on the holy plain of Kurukshetra, O Sanjaya?"
                             android:textSize="16dp" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout

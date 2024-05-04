@@ -1,6 +1,11 @@
 package com.example.Bhagavad_gita_app.Repository
 
+import androidx.lifecycle.LiveData
 import com.example.Bhagavad_gita_app.datasource.api.ApiUtilities
+import com.example.Bhagavad_gita_app.datasource.api.RoomDB.SavedChaptersDao
+import com.example.Bhagavad_gita_app.datasource.api.RoomDB.SavedVersesDao
+import com.example.Bhagavad_gita_app.datasource.api.RoomDB.savedChapters
+import com.example.Bhagavad_gita_app.datasource.api.RoomDB.savedVerse
 import com.example.models.ChaptersItem
 import com.example.models.VercesItemItem
 import kotlinx.coroutines.channels.awaitClose
@@ -10,7 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AppRepository {
+class AppRepository(val savedChaptersDao: SavedChaptersDao,val savedVersesDao: SavedVersesDao) {
     fun getAllChapter(): Flow<List<ChaptersItem>> = callbackFlow {
         val callBack = object : Callback<List<ChaptersItem>>{
             override fun onResponse(
@@ -73,4 +78,20 @@ class AppRepository {
         ApiUtilities.api.getVarseDetail(chapterNumber,verseNumber).enqueue(callback)
         awaitClose{}
     }
+
+    suspend fun insertChapters(savedChapter : savedChapters) = savedChaptersDao.insertChapters(savedChapter)
+
+    fun getSavedChapters(): LiveData<List<savedChapters>> = savedChaptersDao.getSavedChapters()
+
+    fun getaParticularChapter(chapter_number : Int) : LiveData<savedChapters> = savedChaptersDao.getaParticularChapter(chapter_number)
+
+    //Saved Verses
+
+    suspend fun insertVerse(verses: savedVerse)= savedVersesDao.insertVerse(verses)
+
+    fun getAllSavedVerses():LiveData<List<savedVerse>> = savedVersesDao.getAllSavedVerses()
+
+    fun getParticularVerse(chapter_number: Int,verseNumber:Int):LiveData<savedVerse> = savedVersesDao.getParticularVerse(chapter_number, verseNumber)
+
+    suspend fun deleteAParticularVerse(chapter_number: Int,versesNumber:Int) = savedVersesDao.deleteAParticularVerse(chapter_number, versesNumber)
 }
